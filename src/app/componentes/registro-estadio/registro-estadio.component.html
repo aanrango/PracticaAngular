@@ -1,0 +1,65 @@
+<div class="container text-center">
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="">>
+                <img src="/assets/chiringuito.jpg" alt="logo" width="100px"> JUGONES
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/estadios">Estadios </a>                        
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/equipos">Equipos</a>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/paises">Países </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/jugadores">Jugadores</a>
+                        </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <br/><h1>Registrar Estadio</h1><br/><br/>
+
+    <h5>Nombre del estadio:</h5>
+    <input type="text" 
+    class="form-control" 
+    id="nombreEstadio" 
+    required 
+    placeholder="Ej. Estadio Monumental" 
+    [(ngModel)]="estadio.nombre_estadio" 
+    name="nombre"/><br/><br/>
+
+    <h5>Ciudad de ubicación:</h5>
+    <input type="text" 
+    class="form-control" 
+    id="ciudadEstadio" 
+    required 
+    placeholder="Ej. Guayaquil" 
+    [(ngModel)]="estadio.ciudad_estadio" 
+    name="apellido"/><br/><br/>
+
+    <h5>Aforo del estadio:</h5>
+    <input type="number" 
+    class="form-control" 
+    id="edadEstadio" 
+    required 
+    placeholder="Ej. 22000" 
+    [(ngModel)]="estadio.aforo_estadio" 
+    name="edad"/><br/><br/>
+
+
+    <button class="btn btn-success" (click)="crearEstadio()">💾 Registrar</button>&nbsp;
+    <button class="btn btn-success" (click)="navegarEstadios()">🔙 Regresar</button><br/><br/>
+</div>    

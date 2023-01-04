@@ -1,0 +1,96 @@
+<div class="container text-center">
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="">>
+                <img src="/assets/chiringuito.jpg" alt="logo" width="100px"> JUGONES
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/estadios">Estadios </a>                        
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/equipos">Equipos</a>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/paises">Países </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/jugadores">Jugadores</a>
+                        </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <br/><h1>Estadios</h1><br/><br/>
+    <table class="table ">
+        <thead>
+            <tr class="table-success">
+                <td><b>Id</b></td>
+                <td><b>Nombre</b></td>
+                <td><b>Ciudad</b></td>
+                <td><b>Aforo</b></td> 
+                <td><b>Acciones</b></td>            
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let estadio of estadios">
+                <td>
+                    {{estadio.cod_estadio}}
+                </td>
+
+
+                <td *ngIf="editando==estadio.cod_estadio">
+                    <input type="text"
+                    class="form-control"
+                    id="nombreEstadio"
+                    required
+                    [(ngModel)]="estadio.nombre_estadio"
+                    name="nombre"/>
+                </td>
+                <td *ngIf="editando!=estadio.cod_estadio">{{estadio.nombre_estadio}}</td>
+
+                <td *ngIf="editando==estadio.cod_estadio">
+                    <input type="text"
+                    class="form-control"
+                    id="apellidoEstadio"
+                    required
+                    [(ngModel)]="estadio.ciudad_estadio"
+                    name="apellido"/>
+                </td>
+                <td *ngIf="editando!=estadio.cod_estadio">{{estadio.ciudad_estadio}}</td>
+
+                <td *ngIf="editando==estadio.cod_estadio">
+                    <input type="number"
+                    class="form-control"
+                    id="edadAutor"
+                    required
+                    [(ngModel)]="estadio.aforo_estadio"
+                    name="edad"/>
+                </td>
+                <td *ngIf="editando!=estadio.cod_estadio">{{estadio.aforo_estadio}}</td>                        
+
+                <td *ngIf="editando">
+                    <button type="button" class="btn btn-success" (click)="guardarEstadio(this.estadio)">💾 Guardar</button>
+                    <button type="button" class="btn btn-secondary ml-2" (click)="cancelarEdicion()">❌ Cancelar</button>
+                </td>
+
+                <td *ngIf="!editando">
+                    <button class="btn btn-info" (click)="editarEstadio(this.estadio)">Editar 🖊</button>
+                    <button type="button" class="btn btn-danger" (click)="eliminarEstadio(this.estadio.cod_estadio)">Eliminar ❌</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-info" (click)="agregarEstadio()">Crear Estadio</button><br/><br/>
+</div>    

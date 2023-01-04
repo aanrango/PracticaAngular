@@ -1,0 +1,75 @@
+<div class="container text-center"> 
+    
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="">>
+                <img src="/assets/chiringuito.jpg" alt="logo" width="100px"> JUGONES
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/estadios">Estadios </a>                        
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/equipos">Equipos</a>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/paises">Países </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/jugadores">Jugadores</a>
+                        </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <br/><h1>Paises</h1><br/><br/>
+    <table class="table">
+        <thead>
+            <tr class="table-success">
+                <td><b>Id</b></td>
+                <td><b>Nombre</b></td>   
+                <td><b>Acciones</b></td>        
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pais of paises">
+                <td>
+                    {{pais.cod_pais}}
+                </td>
+
+                <td *ngIf="editando==pais.cod_pais">
+                    <input type="text"
+                    class="form-control"
+                    id="nombrePais"
+                    required
+                    [(ngModel)]="pais.nombre_pais"
+                    name="nombre"
+                    />
+                </td>
+                <td *ngIf="editando!=pais.cod_pais">{{pais.nombre_pais}}</td>
+
+
+                <td *ngIf="editando">
+                    <button class="btn btn-success" (click)="guardarPais(this.pais)">💾 Guardar</button>
+                    <button class="btn btn-secondary ml-2" (click)="cancelarEdicion()">❌ Cancelar</button>
+                </td>
+
+                <td *ngIf="!editando">
+                    <button type="button" class="btn btn-info" (click)="editarPais(this.pais)">Editar 🖊</button>
+                    <button type="button" class="btn btn-danger" (click)="eliminarPais(this.pais.cod_pais)">Eliminar ❌</button>
+                </td>
+            </tr>
+        </tbody>    
+    </table>
+
+    <button class="btn btn-info" (click)="agregarPais()">Crear Pais</button>
+</div>
+

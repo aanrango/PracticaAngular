@@ -1,0 +1,105 @@
+<div class="container text-center">
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="">>
+                <img src="/assets/chiringuito.jpg" alt="logo" width="100px"> JUGONES
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/estadios">Estadios </a>                        
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/equipos">Equipos</a>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/paises">Países </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/jugadores">Jugadores</a>
+                        </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <br/><h1>Jugadores</h1><br/><br/>
+    <table class="table ">
+        <thead>
+            <tr class="table-success">
+                <td><b>Id</b></td>
+                <td><b>Nombre</b></td>
+                <td><b>Apellido</b></td>
+                <td><b>Edad</b></td>
+                <td><b>Equipo</b></td>
+                <td><b>Acciones</b></td>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let jugador of jugadores">
+                <td>
+                    {{jugador.cod_jugador}}
+                </td>
+
+
+                <td *ngIf="editando==jugador.cod_jugador">
+                    <input type="text"
+                    class="form-control"
+                    id="nombreJugador"
+                    required
+                    [(ngModel)]="jugador.nombre_jugador"
+                    name="nombre"/>
+                </td>
+                <td *ngIf="editando!=jugador.cod_jugador">{{jugador.nombre_jugador}}</td>
+
+                <td *ngIf="editando==jugador.cod_jugador">
+                    <input type="text"
+                    class="form-control"
+                    id="apellidoJugador"
+                    required
+                    [(ngModel)]="jugador.apellido_jugador"
+                    name="apellido"/>
+                </td>
+                <td *ngIf="editando!=jugador.cod_jugador">{{jugador.apellido_jugador}}</td>
+
+                <td *ngIf="editando==jugador.cod_jugador">
+                    <input type="number"
+                    class="form-control"
+                    id="edadAutor"
+                    required
+                    [(ngModel)]="jugador.edad_jugador"
+                    name="edad"/>
+                </td>
+                <td *ngIf="editando!=jugador.cod_jugador">{{jugador.edad_jugador}}</td>
+                
+                <td *ngIf="editando==jugador.cod_jugador">
+                    <select [(ngModel)]="jugador.cod_equipo" class="form-control" required>
+                        <option *ngFor="let eq of equipo" [value]="eq.cod_equipo">{{eq.nombre_equipo}}</option>
+                    </select>
+                </td> 
+                <td *ngIf="editando!=jugador.cod_jugador">{{jugador.nombreEquipo}}</td>            
+
+                <td *ngIf="editando">
+                    <button type="button" class="btn btn-success" (click)="guardarJugador(this.jugador)">💾 Guardar</button>
+                    <button type="button" class="btn btn-secondary ml-2" (click)="cancelarEdicion()">❌ Cancelar</button>
+                </td>
+
+                <td *ngIf="!editando">
+                    <button class="btn btn-info" (click)="editarJugador(this.jugador)">Editar 🖊</button>
+                    <button type="button" class="btn btn-danger" (click)="eliminarJugador(this.jugador.cod_jugador)">Eliminar ❌</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-info" (click)="agregarJugador()">Crear Jugador</button>
+</div>    

@@ -1,0 +1,72 @@
+<div class="container text-center">
+
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="">>
+            <img src="/assets/chiringuito.jpg" alt="logo" width="100px"> JUGONES
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/estadios">Estadios </a>                        
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/equipos">Equipos</a>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/paises">Países </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/jugadores">Jugadores</a>
+                    </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+  </nav>
+
+  <br/><h1>Registrar Jugador</h1><br/><br/>
+
+  <div class="col-auto">
+    <h5>Nombre del jugador:</h5>
+    <input type="text" 
+    class="form-control" 
+    id="nombreJugador" 
+    required 
+    placeholder="Ej. Pepito" 
+    [(ngModel)]="jugador.nombre_jugador" 
+    name="nombre"/><br/><br/>
+  </div>
+
+  <h5>Apellido del jugador:</h5>
+  <input type="text" 
+  class="form-control" 
+  id="apellidoJugador" 
+  required 
+  placeholder="Ej. Perez" 
+  [(ngModel)]="jugador.apellido_jugador" 
+  name="apellido"/><br/><br/>
+
+  <h5>Edad del jugador:</h5>
+  <input type="number" 
+  class="form-control" 
+  id="edadJugador" 
+  required 
+  placeholder="Ej. 22" 
+  [(ngModel)]="jugador.edad_jugador" 
+  name="edad"/><br/><br/>
+
+  <h5>Equipo del jugador:</h5>
+  <select [(ngModel)]="jugador.cod_equipo" class="form-control" required >
+    <option disabled value="">-Seleccione uno-</option>    
+    <option *ngFor="let eq of equipo" [value]="eq.cod_equipo">{{eq.nombre_equipo}}</option>
+  </select> <br/><br/>
+
+  <button class="btn btn-success" (click)="crearJugador()">💾 Registrar</button> &nbsp;
+  <button class="btn btn-success" (click)="navegarJugadores()">🔙 Regresar</button><br><br><br>
+</div>

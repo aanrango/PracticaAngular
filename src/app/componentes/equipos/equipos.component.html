@@ -1,0 +1,92 @@
+<div class="container text-center"> 
+    
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="">>
+                <img src="/assets/chiringuito.jpg" alt="logo" width="100px"> JUGONES
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/estadios">Estadios </a>                        
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/equipos">Equipos</a>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/paises">Países </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/jugadores">Jugadores</a>
+                        </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+
+    <br/><h1>Equipos</h1><br/><br/>
+        
+    <table class="table">
+        <thead>
+            <tr class="table-success">
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <!--<td><b>Año de Fundacion</b></td>-->
+                <th scope="col">Estadio</th>
+                <th scope="col">Pais</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let equipo of equipos">
+                <td>
+                    {{equipo.cod_equipo}}
+                </td>
+
+                <td *ngIf="editando==equipo.cod_equipo">
+                    <input type="text"
+                    class="form-control"
+                    id="nombreEquipo"
+                    required
+                    [(ngModel)]="equipo.nombre_equipo"
+                    name="nombre"
+                    />
+                </td>
+                <td *ngIf="editando!=equipo.cod_equipo">{{equipo.nombre_equipo}}</td>
+
+                <td *ngIf="editando==equipo.cod_equipo">
+                    <select [(ngModel)]="equipo.cod_estadio" class="form-control" required>
+                        <option *ngFor="let es of estadio" [value]="es.cod_estadio">{{es.nombre_estadio}}</option>
+                    </select>
+                </td>
+                <td *ngIf="editando!=equipo.cod_equipo">{{equipo.nombreEstadio}}</td>
+            
+                <td *ngIf="editando==equipo.cod_equipo">
+                    <select [(ngModel)]="equipo.cod_pais" class="form-control" required>
+                        <option *ngFor="let pa of pais" [value]="pa.cod_pais">{{pa.nombre_pais}}</option>
+                    </select>
+                </td>
+                <td *ngIf="editando!=equipo.cod_equipo">{{equipo.nombrePais}}</td>
+
+                <td *ngIf="editando">
+                    <button class="btn btn-success" (click)="guardarEquipo(this.equipo)">💾 Guardar</button>
+                    <button class="btn btn-secondary ml-2" (click)="cancelarEdicion()">❌ Cancelar</button>
+                </td>
+
+                <td *ngIf="!editando">
+                    <button type="button" class="btn btn-info" (click)="editarEquipo(this.equipo)">Editar 🖊</button>
+                    <button type="button" class="btn btn-danger" (click)="eliminarEquipo(this.equipo.cod_equipo)">Eliminar ❌</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-info" (click)="agregarEquipo()">Crear Equipo</button>
+</div>
